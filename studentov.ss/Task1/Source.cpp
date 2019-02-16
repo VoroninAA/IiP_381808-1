@@ -2,6 +2,7 @@
 #include <locale.h>
 #include <string.h>
 #include <math.h>
+// Версия 2: Добавлен комментприй 
 int stinint(const char str[]) //перевод строкового представления числа в числовое(int)
 {
 	int res = 0;
