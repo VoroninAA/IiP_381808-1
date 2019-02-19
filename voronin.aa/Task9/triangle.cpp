@@ -1,7 +1,30 @@
 #include <iostream>
 #include<locale.h>
 #include"triangle.h"
+
 using namespace std;
+triangle::triangle() {
+	a = 0.0;
+	b = 0.0;
+	c = 0.0;
+}
+triangle::triangle(double x, double y, double z) {
+	a = x;
+	b = y;
+	c = z;
+};
+triangle:: triangle(const triangle& A) {
+	triangle B;
+	B.a = A.a;
+	B.b = A.b;
+	B.c = A.c;
+	
+}
+triangle::~triangle() {
+	a = 0;
+	b = 0;
+	c = 0;
+}
 char max(double a, double b, double c) {
 	if (a >= b && a >= c) return 'a';
 	if (b >= a && b >= c) return 'b';
