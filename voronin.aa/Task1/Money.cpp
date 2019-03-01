@@ -1,4 +1,6 @@
 #include "Money.h"
+#include<cmath>
+#include<iostream>
 Money::Money() {
 	c = 0;
 	r = 0;
@@ -44,73 +46,106 @@ istream& operator>>(istream& stream,Money& m) {
 	return stream;
 
 }
-Money& Money::operator+(const Money& m) {
-	double t1, t2,rez;
-	t1 = r*100 + c ;
-	t2 = m.r*100 + m.c ;
-	if (z == '-') t1 = t1 * -1;
-	if (m.z == '-') t2 = t2 * -1;
-	rez=t2 + t1;
-
-	r = (unsigned int)(rez/100);
-	c =  (int)rez%100;
-	if (rez < 0)
-		z = '-';
-		return *this;
-	} //slozhenie s perevodom v deystvitelnoe chislo
-Money& Money::operator-(const Money& m) {
-	double t1, t2, rez;
-	t1 = r * 100 + c;
-	t2 = m.r * 100 + m.c;
-	if (z == '-') t1 = t1 * -1;
-	if (m.z == '-') t2 = t2 * -1;
-	rez = t2 - t1;
+Money Money::operator+(const Money& m) {
+	Money res;
+	if (((z == '+') && (m.z == '+')) || ((z == '-') && (m.z == '-')))  //esli obe summi >0
+		return sum(res, m);
 	
-	if (rez < 0)
-		r = ((int)rez / 100)*-1;
-	else r = ((int)rez / 100);
-	if (rez<0)
-		c = ((int)rez % 100)*-1;
-	else c = ((int)rez % 100);
-	if (rez > 0)
-		z = '-';
-		return *this;
-	}//vichitanie s perevodom v deystvitelnoe chislo
+
+	if ((z == '+') && (m.z == '-'))  
+		return min(res, m);
+	
+	 if ((z == '-') && (m.z == '+'))
+	return min(res,m);
+}
+Money Money::operator-(const Money& m) {
+	Money res;
+	if (((z == '+') && (m.z == '+')) || ((z == '-') && (m.z == '+')))  //esli obe summi >0
+		return min(res, m);
+
+
+	if ((z == '+') && (m.z == '-'))
+		return sum(res, m);
+
+	if ((z == '-') && (m.z == '-'))
+		return min(res, m);
+}	
 Money operator*(const Money& m, double d) {
 		 Money res;
-		 double t1;
-		 t1 = m.r * 100 + m.c;
-		 if (m.z == '-') t1 = t1 * -1;
-		 t1 = d * t1;
-	
-		 if (t1 < 0)
-			 res.r = ((int)t1 / 100)*-1;
-		 else res.r = ((int)t1 / 100);
-		 if (t1 < 0)
-			 res.c = ((int)t1 % 100)*-1;
-		 else res.c = ((int)t1 % 100);
-		 if (t1 < 0)
+		 if (((m.z == '+') && (d >= 0)) || ((m.z == '-') && (d < 0)))
+			 res.z = '+';
+		 if ((m.z == '-') && (d >= 0))
 			 res.z = '-';
+		 if ((d < 0) && (m.z == '+'))
+			 res.z = '-';
+		 double tmp1,tmp2;
+		 tmp1 = m.c;
+		 tmp2 = m.r;
+		  tmp1 *= abs(d);
+		  tmp2 *=abs(d);
+		  res.r = (int)tmp2;
+		  res.c = (((int)(100 * tmp2)) % 100);
+		  res.c += (int)tmp1;
+		  if (res.c >= 100);
+		  res.r += (int)res.c / 100;
+		  res.c = res.c % 100;
 		 return res;
-
-	 }//ymnozhenie s perevodom v deystvitelnoe chislo
+}
 Money operator/(const Money& m, double d) {
+	Money res;
+	if (((m.z == '+') && (d >= 0)) || ((m.z == '-') && (d < 0))) 
+		res.z = '+';
+	if ((m.z == '-') && (d >= 0))  
+		res.z = '-';
+	if ((d < 0) && (m.z == '+'))
+		res.z = '-';
+	double tmp1, tmp2;
+	tmp1 = m.c;
+	tmp2 = m.r;
+	tmp1 /= abs(d);
+	tmp2 /= abs(d);
+	res.r = (int)tmp2;
+	res.c = (((int)(100 * tmp2)) % 100);
+	res.c += (int)tmp1;
+	if (res.c >= 100);
+	res.r += (int)res.c / 100;
+	res.c = res.c % 100;
+	return res;
+}
+Money Money::sum(Money& res, const Money& m) {
+	res.c += c + m.c;
+	res.r = m.r + r;
+	if (res.c >= 100) {
+		res.r += 1;
+		res.c -= 100;
+	}
+	res.z = z;
+	return res;
+}
+Money Money::min(Money& res, const Money& m) {
+	if ((r > m.r) || (r == m.r&&c > m.c)) {
+		res.r = r - m.r;
+		res.c = c - m.c;
+		res.z = z;
+	}
+	else {
+		res.r = m.r - r;
+		res.c = m.c - c;
+		res.z = m.z;
+	}
+	if (res.c <= 0) {
+		if (res.r == 0) {
+			res.c = abs(c);
+			res.z = '-';
+		}
+		else {
+			res.r -= 1;
+			res.c = 100 - abs(res.c);
 
-	 Money res;
-	 double t1;
-	 t1 = m.r * 100 + m.c;
-	 if (m.z == '-') t1 = t1 * -1;
-	 t1 = t1 / d;
-	
+		}
+	}
+	res.c = abs(res.c);
+	res.r = abs(res.r);
 
-	 if (t1 < 0)
-		 res.r = ((int)t1 / 100)*-1;
-	 else res.r = ((int)t1 / 100);
-	 if (t1 < 0)
-		 res.c = ((int)t1 % 100)*-1;
-	 else res.c = ((int)t1 % 100);
-	 if (t1 < 0)
-		res.z  = '-';
-	 return res;
-
- } //delenie s perevodom v deystvitelnoe chislo
+	return res;
+}
