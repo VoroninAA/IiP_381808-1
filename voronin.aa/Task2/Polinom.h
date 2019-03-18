@@ -10,28 +10,27 @@ private:
 	friend istream& operator>>(istream& stream, Polinom& p);
 	// Поля класса
 	int deg; // Степень полинома
-	int value[13]; // Хранение коэффициентов полинома
+	double* value; // Хранение коэффициентов полинома
 
 public:
 	// Конструкторы и деструктор
 	Polinom(); // Инициализатор по умолчанию
-	Polinom(int n); //Инициализатор
-	Polinom(int deg, int value[]); // Инициализатор
+	Polinom(int deg, double value[]); // Инициализатор
 	Polinom(const Polinom& p); // Копирование
 	~Polinom(); // Деструктор
 
 	// Методы класса
-	void setdeg(int n); // Установить степень полинома
-	void setvalue(int mas[]); // Установаить коэффициенты мономов полинома
+    void setdeg(int n); // Установить степень полинома
+	void setvalue(double mas[]); // Установаить коэффициенты мономов полинома
 	int showdeg(); // Показать максимальную степень полинома
-	int showvalue(int n); //Показать коэффициент выбранной степени
-	int findfun(int x); // Найти значение полинома в точке
+	double showvalue(int n); //Показать коэффициент выбранной степени
+	double findfun(double x); // Найти значение полинома в точке
 	Polinom derivative(); // Найти производную полинома
 
 	// Перегрузка операторов
 	Polinom & operator=(const Polinom & p);
-	int& Polinom::operator[](int n);
-	const int& Polinom::operator[](int n) const;
+	double& Polinom::operator[](int n);
+	const double& Polinom::operator[](int n) const;
 	
 };
 enum PolEx

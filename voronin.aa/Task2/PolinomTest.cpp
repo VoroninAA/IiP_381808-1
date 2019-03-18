@@ -7,19 +7,14 @@ using namespace std;
 int main() {
 	setlocale(LC_CTYPE, "russian");
     // Тест инициализатора
-	int mas[13];
+	double mas[13];
 	for (int i = 0; i < 13; i++)
 		mas[i] = i;
 	Polinom a(12, mas);
 	cout << "Инициализация- " << a << endl;
 	// Тест установки степени и значений
 	Polinom b;
-	try {
-		b.setdeg(12);
-	}
-	catch (PolExeption& ex) {
-		cout << ex.reason << endl;
-	}
+	b.setdeg(12);
 	b.setvalue(mas);
 
 	// Тест вывода степени и значений
@@ -33,10 +28,14 @@ int main() {
 	// Тест нахождения функции
 	int t = a.findfun(1);
 	cout << "Значение функции= " << t << endl;
-	// Тест производной
+
+
 	Polinom c;
+
+	// Тест производной
 	c = a.derivative();
 	cout << "Производная= " << c << endl;
+
 	// Тест оператора присваивания
 	Polinom f;
 	f = a;
@@ -50,11 +49,11 @@ int main() {
 
 	// Тест ввода из файла
 	ifstream fi;
-	fi.open("test1.txt");
-		Polinom d(12);
+	fi.open("test.txt");
+		Polinom d(12,mas);
 		fi >> d;
 		fi.close();
-
+		
 	system("pause");
 	return 0;
 	
