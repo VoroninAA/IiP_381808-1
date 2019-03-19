@@ -2,7 +2,6 @@
 #include<cmath>
 #include<iostream>
 #include<fstream>
-#include <string>
 
 Polinom::Polinom()
 {
@@ -11,6 +10,10 @@ Polinom::Polinom()
 	for (int i = 0; i <deg+1; i++) {
 		value[i] = 0;
 	}
+}
+Polinom::Polinom(int n) {
+	deg = n;
+	value = new double[deg + 1];
 }
 Polinom::Polinom(int n, double mas[]) {
 	deg = n;
@@ -28,33 +31,21 @@ Polinom::Polinom(const Polinom& p) {
 }
 Polinom::~Polinom()
 {
-	free(value);
+	delete(value);
 	deg = 0;
+	value = 0;
 }
-void Polinom::setdeg(int n) {
-	 deg = n;
-}
-void Polinom::setvalue(double mas[]) {
-	value = new double[deg + 1];
-	for (int i = 0; i < deg+1; i++) {
+void Polinom::out() {
+	std::cout << "Степень_полинома- " << deg << ' ';;
 
-		value[i] = mas[i];
+	for (int i = deg; i >= 0; i--) {
+		if (i != 0)
+			std::cout << value[i] << "x^" << i << '+';
+		else std::cout << value[i];
 	}
+	return;
 }
-int Polinom::showdeg()
-
-{
-	int max=0;
-	for (int i = 0; i<deg+1; i++) {
-		if (value[i] != 0)
-			max = i;
-	}
-	return max;
-}
-double Polinom::showvalue(int n){
-	return value[n];
-	}
-double Polinom :: findfun(double x) {
+double Polinom :: getfun(double x) {
 	double y = 0;
 	for (int i = 0; i < deg+1; i++) {
 		y += value[i] * pow(x, i);
@@ -62,13 +53,14 @@ double Polinom :: findfun(double x) {
 	return y;
 }
 Polinom Polinom::derivative() { 
-	Polinom res(deg-1,value);
+	Polinom res(deg-1);
 	for (int i = 0; i < res.deg+1; i++)
 		res.value[i] = value[i + 1] * (i + 1) ;
 	return res;
 } 
 Polinom& Polinom::operator=(const Polinom& p) {
 	deg = p.deg;
+	delete(value);
     value = new double[deg + 1];
 	for (int i = 0; i < deg+1; i++) {
 		value[i] = p.value[i];
@@ -76,34 +68,51 @@ Polinom& Polinom::operator=(const Polinom& p) {
 	}
 	return *this;
 }
+Polinom Polinom::operator+(const Polinom& p) {
+	int tmp;
+	int tmp2;
+	if (deg > p.deg) {
+		tmp2 = p.deg;
+		tmp = deg;
+
+	}
+	else {
+		tmp2 = deg;
+		tmp = p.deg;
+	}
+	Polinom res(tmp);
+
+
+	for (int i = 0; i < tmp2 + 1;i++) {
+		res.value[i] = p.value[i] + value[i];
+	}
+	if (deg > p.deg)
+	for (int i = tmp2+1; i < tmp + 1; i++) {
+		res.value[i] = value[i];
+	}
+	else 
+		for (int i = tmp2+1; i < tmp + 1; i++) {
+		res.value[i] = p.value[i];
+	}
+	return res;
+}
 ostream & operator<<(ostream & stream, const Polinom & p)
 {
-	stream << "Степень_полинома- " << p.deg <<' ';;
+	stream  << p.deg <<' ';;
 
 	for (int i = p.deg; i >= 0; i--) {
-		if(i!=0)
-	stream << p.value[i] <<"x^" <<i <<'+' ;
-		else stream << p.value[i];
+	stream << p.value[i]  <<' ' ;
 	}
 	return stream;
 }
 istream & operator>>(istream & stream, Polinom & p)
 {
-	int pos = 0;
-	string str1, str2;
-	stream >> str1 >> p.deg  >> str2;
-	string s1;
-	s1 = str2.substr(0,str2.find_first_of('x'));
-		p.value[p.deg] = stoi(s1);
+	
+	stream >> p.deg;
+	
 	for (int i = p.deg-1; i >= 0; i--) {
-		int tmp1, tmp2;
 
-		string tmpstring;
-		tmp1=str2.find('+',pos);
-		tmp2 = str2.find('x', tmp1);
-		pos = tmp2;
-		tmpstring = str2.substr(tmp1 + 1, tmp2 - tmp1);
-		p.value[i] = stoi(tmpstring);
+		stream >> p.value[i];
 }
 	return stream;
 }
