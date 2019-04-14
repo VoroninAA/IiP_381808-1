@@ -146,6 +146,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Collection.h" />
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="FloorScales.h" />
+    <ClInclude Include="NotSTLVector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Collection.cpp" />
+    <ClCompile Include="Date.cpp" />
+    <ClCompile Include="FloorScales.cpp" />
+    <ClCompile Include="FloorScalesTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
