@@ -146,6 +146,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Date.h" />
+    <ClInclude Include="Depozit.h" />
+    <ClInclude Include="FIO.h" />
+    <ClInclude Include="Info.h" />
+    <ClInclude Include="MyVector.h" />
+    <ClInclude Include="ProcCenter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Date.cpp" />
+    <ClCompile Include="Depozit.cpp" />
+    <ClCompile Include="DepozitTest.cpp" />
+    <ClCompile Include="FIO.cpp" />
+    <ClCompile Include="Info.cpp" />
+    <ClCompile Include="ProcCenter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
