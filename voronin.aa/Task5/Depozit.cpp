@@ -1,4 +1,4 @@
-#include "Depozit.h"
+п»ї#include "Depozit.h"
 #include<iostream>
 
 
@@ -30,25 +30,25 @@ void Depozit::LogIn(int _IDNumber, std::string _password)
 				ifauthorize = true;
 				userNumber = i;
 			}
-			else throw DepozitExeption("Неверный пароль!");
+			else throw DepozitExeption("РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ!");
 		}
 	}
 	if (userNumber == -1)
-			throw DepozitExeption("Пользователем в таким ID не найден");
+			throw DepozitExeption("РџРѕР»СЊР·РѕРІР°С‚РµР»РµРј РІ С‚Р°РєРёРј ID РЅРµ РЅР°Р№РґРµРЅ");
 }
 
 void Depozit::ShowInfo()
 {
-	std::cout << "Возможные варианты депозита:" << std::endl << "1) 3 Месяца под 5%"
-		<< std::endl << "2) 6 Месяцев под 5,5% "
-		<< std::endl << "3) 1 Год под 6%"
-		<< std::endl << "4) 2 Года под 6.5%"
-		<< std::endl << "5) 3 Года под 7%"
-		<< std::endl << "Диапозоны сумм:"
-		<< std::endl << "1) До 100 т.р"
-		<< std::endl << "2) От 100 т.р. до 500 т.р   +0,5%"
-		<< std::endl << "3) От 500 т.р.  до 1 млн.р.  +1%"
-		<< std::endl << "4) Свыше 1 млн.р. +1,5%" <<std::endl;
+	std::cout << "Р’РѕР·РјРѕР¶РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ РґРµРїРѕР·РёС‚Р°:" << std::endl << "1) 3 РњРµСЃСЏС†Р° РїРѕРґ 5%"
+		<< std::endl << "2) 6 РњРµСЃСЏС†РµРІ РїРѕРґ 5,5% "
+		<< std::endl << "3) 1 Р“РѕРґ РїРѕРґ 6%"
+		<< std::endl << "4) 2 Р“РѕРґР° РїРѕРґ 6.5%"
+		<< std::endl << "5) 3 Р“РѕРґР° РїРѕРґ 7%"
+		<< std::endl << "Р”РёР°РїРѕР·РѕРЅС‹ СЃСѓРјРј:"
+		<< std::endl << "1) Р”Рѕ 100 С‚.СЂ"
+		<< std::endl << "2) РћС‚ 100 С‚.СЂ. РґРѕ 500 С‚.СЂ   +0,5%"
+		<< std::endl << "3) РћС‚ 500 С‚.СЂ.  РґРѕ 1 РјР»РЅ.СЂ.  +1%"
+		<< std::endl << "4) РЎРІС‹С€Рµ 1 РјР»РЅ.СЂ. +1,5%" <<std::endl;
 		
 }
 
@@ -62,9 +62,9 @@ bool Depozit::CheckDepozit()
 void Depozit::OpenDepozit(int _timeperiodtype, int _sum,Date date)
 {
 	if (_timeperiodtype > 5 || _timeperiodtype < 1)
-		throw DepozitExeption("Неверный период времени");
+		throw DepozitExeption("РќРµРІРµСЂРЅС‹Р№ РїРµСЂРёРѕРґ РІСЂРµРјРµРЅРё");
 	if (_sum > database[userNumber].GetAmount())
-		throw DepozitExeption("Недостаточно средств на счету");
+		throw DepozitExeption("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃСЂРµРґСЃС‚РІ РЅР° СЃС‡РµС‚Сѓ");
 	double perc = 0;
 	switch (_timeperiodtype) {
 	case 1: {

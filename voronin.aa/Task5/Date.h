@@ -1,6 +1,6 @@
-#pragma once
+п»ї#pragma once
 #include<fstream>
-// Вспомогательный класс дата
+// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РґР°С‚Р°
 class Date
 {
 private:
@@ -12,8 +12,8 @@ public:
 	Date();
 	Date(const Date& _date);
 	Date(int _day, int _month, int _year);
-	void SetDate(int _day, int _month, int _year); // Установить дату
-	void GetDate(int & _day, int & _month, int & _year) const; // Узнать дату
+	void SetDate(int _day, int _month, int _year); // РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РґР°С‚Сѓ
+	void GetDate(int & _day, int & _month, int & _year) const; // РЈР·РЅР°С‚СЊ РґР°С‚Сѓ
 	int GetDay();
 	int GetMonth();
 	int GetYear();

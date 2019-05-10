@@ -1,7 +1,7 @@
-#pragma once
+п»ї#pragma once
 #include<fstream>
 #include<string>
-// Класс хранящий ФИО
+// РљР»Р°СЃСЃ С…СЂР°РЅСЏС‰РёР№ Р¤РРћ
 class FIO
 {
 
@@ -20,7 +20,7 @@ public:
 	void SetPatronymic(std::string _pat) { patronymic = _pat; };
 	FIO& operator=(const FIO& _f);
 
-	// Перегрузка операторов ввода/вывода
+	// РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂРѕРІ РІРІРѕРґР°/РІС‹РІРѕРґР°
 	
 	friend std::ostream& operator<<(std::ostream& stream,const FIO& _f);
 	friend std::istream& operator>>(std::istream& stream, FIO& _f);

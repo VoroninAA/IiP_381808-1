@@ -1,34 +1,34 @@
-#pragma once
+п»ї#pragma once
 #include"ProcCenter.h"
 #include"MyVector.h"
 #include"Date.h"
-// Класс депозит
+// РљР»Р°СЃСЃ РґРµРїРѕР·РёС‚
 class Depozit
 {
 private:
-	MyVector<ProcCenter> database; //База данных пользователя
-	bool ifauthorize; // Авторизирован ли пользователь
+	MyVector<ProcCenter> database; //Р‘Р°Р·Р° РґР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+	bool ifauthorize; // РђРІС‚РѕСЂРёР·РёСЂРѕРІР°РЅ Р»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
 	int userNumber;
 
 public:
-	Depozit(); //Конструктор по умолчанию
-	~Depozit();//Деструктор
-	Depozit(const Depozit& _d);// Конструктор копирования
-	void LogIn(int _IDNumber, std::string _password);// Авторизовать пользователя
-	void ShowInfo();// Показать информацию о возможных депозитах
-	bool CheckDepozit();// Проверить наличие депозита
-	void OpenDepozit(int _timeperiod, int _sum,Date date);// Открыть депозит
-	void DepozitInfo();// Информация о депозите
-	void GetPercents(int n);// Снять проценты депозита на счет по выбранному номеру месяца
-	void CloseDepozit();// Закрыть депозит
-	void LogOut();//Выход 
+	Depozit(); //РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
+	~Depozit();//Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+	Depozit(const Depozit& _d);// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+	void LogIn(int _IDNumber, std::string _password);// РђРІС‚РѕСЂРёР·РѕРІР°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+	void ShowInfo();// РџРѕРєР°Р·Р°С‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РІРѕР·РјРѕР¶РЅС‹С… РґРµРїРѕР·РёС‚Р°С…
+	bool CheckDepozit();// РџСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ РґРµРїРѕР·РёС‚Р°
+	void OpenDepozit(int _timeperiod, int _sum,Date date);// РћС‚РєСЂС‹С‚СЊ РґРµРїРѕР·РёС‚
+	void DepozitInfo();// РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РґРµРїРѕР·РёС‚Рµ
+	void GetPercents(int n);// РЎРЅСЏС‚СЊ РїСЂРѕС†РµРЅС‚С‹ РґРµРїРѕР·РёС‚Р° РЅР° СЃС‡РµС‚ РїРѕ РІС‹Р±СЂР°РЅРЅРѕРјСѓ РЅРѕРјРµСЂСѓ РјРµСЃСЏС†Р°
+	void CloseDepozit();// Р—Р°РєСЂС‹С‚СЊ РґРµРїРѕР·РёС‚
+	void LogOut();//Р’С‹С…РѕРґ 
 
 
 	friend std::istream& operator>>(std::istream& stream, Depozit& _f);
 	friend std::ostream& operator<<(std::ostream& stream, Depozit& _f);
 };
  
-// Описание исключений
+// РћРїРёСЃР°РЅРёРµ РёСЃРєР»СЋС‡РµРЅРёР№
 struct DepozitExeption {
 	std::string reason;
 	DepozitExeption(std::string r) :
